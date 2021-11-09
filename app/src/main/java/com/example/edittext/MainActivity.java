@@ -7,12 +7,16 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
     private EditText et_id;
     private Button btn_test;
     private String string;
+    private ImageView test_Image;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,15 +25,28 @@ public class MainActivity extends AppCompatActivity {
 
         et_id=findViewById(R.id.et_id);
         btn_test=findViewById((R.id.btn_test));
+        test_Image=(ImageView)findViewById(R.id.test_Image);
+
+        Intent intent = new Intent(MainActivity.this,Subactivity.class);
 
 
         btn_test.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 string=et_id.getText().toString();
+                if(string.length()==0)Toast.makeText(getApplicationContext(),"Need Data",Toast.LENGTH_LONG).show();
 
-                Intent intent = new Intent(MainActivity.this,Subactivity.class);
+
                 intent.putExtra("str",string);
+                startActivity(intent);
+            }
+        });
+
+
+        test_Image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(),"Just test!",Toast.LENGTH_SHORT).show();
                 startActivity(intent);
             }
         });

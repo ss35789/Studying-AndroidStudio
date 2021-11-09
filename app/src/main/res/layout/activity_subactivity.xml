@@ -14,7 +14,7 @@
         android:id="@+id/sub_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="hello"
+
         android:textSize="30dp"
         />
 
