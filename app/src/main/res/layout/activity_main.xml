@@ -9,6 +9,8 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
+
+
     <EditText
         android:id="@+id/et_id"
         android:layout_width="300dp"

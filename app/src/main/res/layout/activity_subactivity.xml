@@ -24,4 +24,9 @@
         android:layout_height="wrap_content"
         android:text="뒤로"/>
 
+    <ListView
+        android:id="@+id/list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
 </LinearLayout>

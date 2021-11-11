@@ -9,7 +9,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -17,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     private Button btn_test;
     private String string;
     private ImageView test_Image;
+    private ListView list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +32,10 @@ public class MainActivity extends AppCompatActivity {
         btn_test=findViewById((R.id.btn_test));
         test_Image=(ImageView)findViewById(R.id.test_Image);
 
+
         Intent intent = new Intent(MainActivity.this,Subactivity.class);
+
+
 
 
         btn_test.setOnClickListener(new View.OnClickListener() {
@@ -50,5 +58,8 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
+
     }
 }
