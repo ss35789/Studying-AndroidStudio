@@ -3,6 +3,7 @@ package com.example.edittext;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -23,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     private String string;
     private ImageView test_Image;
     private ListView list;
+    private String shared;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,10 +35,15 @@ public class MainActivity extends AppCompatActivity {
         btn_test=findViewById((R.id.btn_test));
         btn_NDmove=findViewById((R.id.btn_NDmove));
         test_Image=(ImageView)findViewById(R.id.test_Image);
+        SharedPreferences sharedPreferences=getSharedPreferences(shared,0);
+        String value=sharedPreferences.getString("임시기억자료","");
+        et_id.setText(value);
 
 
         Intent intent = new Intent(MainActivity.this,Subactivity.class);
         Intent intent_ND = new Intent(MainActivity.this,NDActivity.class);
+
+
 
 
 
@@ -68,11 +75,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
 
-
-
-
-
+        SharedPreferences sharedPreferences=getSharedPreferences(shared,0);
+        SharedPreferences.Editor editor=sharedPreferences.edit();
+        String value=et_id.getText().toString();
+        editor.putString("임시기억자료",value);
+        editor.commit();
     }
 }
