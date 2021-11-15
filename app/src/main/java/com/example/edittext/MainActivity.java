@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
 
     private EditText et_id;
     private Button btn_test;
+    private Button btn_NDmove;
     private String string;
     private ImageView test_Image;
     private ListView list;
@@ -30,10 +31,12 @@ public class MainActivity extends AppCompatActivity {
 
         et_id=findViewById(R.id.et_id);
         btn_test=findViewById((R.id.btn_test));
+        btn_NDmove=findViewById((R.id.btn_NDmove));
         test_Image=(ImageView)findViewById(R.id.test_Image);
 
 
         Intent intent = new Intent(MainActivity.this,Subactivity.class);
+        Intent intent_ND = new Intent(MainActivity.this,NDActivity.class);
 
 
 
@@ -49,6 +52,12 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        btn_NDmove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(intent_ND);
+            }
+        });
 
 
         test_Image.setOnClickListener(new View.OnClickListener() {
@@ -58,6 +67,10 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
+
+
 
 
 
