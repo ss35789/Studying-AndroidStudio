@@ -5,7 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
+import android.webkit.WebBackForwardList;
+import android.webkit.WebChromeClient;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -20,20 +25,37 @@ public class MainActivity extends AppCompatActivity {
 
     private EditText et_id;
     private Button btn_test;
-    private Button btn_NDmove;
+
     private String string;
     private ImageView test_Image;
     private ListView list;
     private String shared;
+    private WebView webview;
+    private String url="https://www.naver.com/";
+
 
     @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if((keyCode==KeyEvent.KEYCODE_BACK)&&webview.canGoBack()){
+            webview.goBack();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         et_id=findViewById(R.id.et_id);
         btn_test=findViewById((R.id.btn_test));
-        btn_NDmove=findViewById((R.id.btn_NDmove));
+
+        webview=findViewById(R.id.webview);
+        webview.getSettings().setJavaScriptEnabled(true);
+        webview.loadUrl(url);
+        webview.setWebChromeClient((new WebChromeClient()));
+        webview.setWebViewClient(new WebViewClientClass());
+
         test_Image=(ImageView)findViewById(R.id.test_Image);
         SharedPreferences sharedPreferences=getSharedPreferences(shared,0);
         String value=sharedPreferences.getString("임시기억자료","");
@@ -41,7 +63,11 @@ public class MainActivity extends AppCompatActivity {
 
 
         Intent intent = new Intent(MainActivity.this,Subactivity.class);
-        Intent intent_ND = new Intent(MainActivity.this,NDActivity.class);
+
+
+
+
+
 
 
 
@@ -59,12 +85,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        btn_NDmove.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(intent_ND);
-            }
-        });
+
 
 
         test_Image.setOnClickListener(new View.OnClickListener() {
@@ -86,5 +107,13 @@ public class MainActivity extends AppCompatActivity {
         String value=et_id.getText().toString();
         editor.putString("임시기억자료",value);
         editor.commit();
+    }
+
+    private class WebViewClientClass extends WebViewClient {
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView view, String url) {//햔재 페이지의 url을 읽어오는 메서드
+            view.loadUrl(url);
+            return true;
+        }
     }
 }
