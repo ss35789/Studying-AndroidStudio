@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="240dp"
+    android:layout_height="match_parent"
+    android:layout_gravity="start"
+    android:background="#EC8B8B"
+    android:orientation="vertical"
+    android:id="@+id/drawer">
+
+    <Button
+        android:id="@+id/btn_close"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="메뉴닫기"
+        android:layout_margin="20dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="테스트"
+        android:background="#BA5555"
+        android:gravity="center"
+        android:textSize="25dp"
+        android:layout_margin="30dp"/>
+
+
+</LinearLayout>

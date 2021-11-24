@@ -1,11 +1,14 @@
 package com.example.edittext;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.webkit.WebBackForwardList;
 import android.webkit.WebChromeClient;
@@ -25,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
 
     private EditText et_id;
     private Button btn_test;
+    private Button btn_open;
+    private Button btn_close;
 
     private String string;
     private ImageView test_Image;
@@ -32,6 +37,11 @@ public class MainActivity extends AppCompatActivity {
     private String shared;
     private WebView webview;
     private String url="https://www.naver.com/";
+
+    private DrawerLayout drawerLayout;
+    private View    drawer;
+
+
 
 
     @Override
@@ -49,6 +59,11 @@ public class MainActivity extends AppCompatActivity {
 
         et_id=findViewById(R.id.et_id);
         btn_test=findViewById((R.id.btn_test));
+        drawerLayout=findViewById(R.id.main);
+        drawer=findViewById(R.id.drawer);
+        btn_open=findViewById(R.id.btn_openmenu);
+        btn_close=findViewById(R.id.btn_close);
+
 
         webview=findViewById(R.id.webview);
         webview.getSettings().setJavaScriptEnabled(true);
@@ -63,16 +78,23 @@ public class MainActivity extends AppCompatActivity {
 
 
         Intent intent = new Intent(MainActivity.this,Subactivity.class);
+        drawerLayout=findViewById(R.id.main);
 
 
 
+        btn_open.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                drawerLayout.openDrawer(drawer);
+            }
+        });
 
-
-
-
-
-
-
+        btn_close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                drawerLayout.closeDrawer(drawer);
+            }
+        });
 
         btn_test.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,8 +117,39 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        drawerLayout.setDrawerListener(listener);
+        drawer.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return true;
+            }
+        });
+
+
 
     }
+
+    DrawerLayout.DrawerListener listener= new DrawerLayout.DrawerListener() {
+        @Override
+        public void onDrawerSlide(@NonNull View drawerView, float slideOffset) {
+
+        }
+
+        @Override
+        public void onDrawerOpened(@NonNull View drawerView) {
+
+        }
+
+        @Override
+        public void onDrawerClosed(@NonNull View drawerView) {
+
+        }
+
+        @Override
+        public void onDrawerStateChanged(int newState) {
+
+        }
+    };
 
     @Override
     protected void onDestroy() {
@@ -116,4 +169,9 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
     }
+
+
+
+
+
 }
